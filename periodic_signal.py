@@ -34,7 +34,7 @@ class Signal(object):
         
         self.set_domain()
         
-    def add(self, signal_type, frequency, magnitude, phase):
+    def add(self, signal_type, frequency, amplitude, phase):
         '''
         Add a component to the signal
 
@@ -44,12 +44,12 @@ class Signal(object):
             Component type. Should be either 'sin' or 'cos'.
         frequency : float
             Components frequency in cycles per second.
-        magnitude : float
+        amplitude : float
             The components peak value.
         phase : float
             The components phase.
         '''
-        sig = BasicSignal(signal_type, frequency, magnitude, phase, self.sampling_frequency, self.length)
+        sig = BasicSignal(signal_type, frequency, amplitude, phase, self.sampling_frequency, self.length)
         self.collection.append(sig)
         self.update()
         
@@ -81,7 +81,7 @@ class Signal(object):
         
         
 class BasicSignal(object):
-    def __init__(self, signal_type, frequency, magnitude, phase, sampling_frequency, length):
+    def __init__(self, signal_type, frequency, amplitude, phase, sampling_frequency, length):
         '''
         Creates a basic sin or cos signal
 
@@ -104,7 +104,7 @@ class BasicSignal(object):
         self.length = length
         self.type = signal_type
         self.frequency = frequency
-        self.magnitude = magnitude
+        self.amplitude = amplitude
         self.phase = phase
         self.sample_rate = 1./self.sampling_frequency
         self.size = sampling_frequency * length
@@ -116,7 +116,7 @@ class BasicSignal(object):
     def create_signal(self):
         function = self.set_function()
         self.x = np.arange(0, self.length, self.sample_rate)
-        self.y = self.magnitude * function(2 * np.pi * self.frequency * self.x + self.phase)
+        self.y = self.amplitude * function(2 * np.pi * self.frequency * self.x + self.phase)
         
     def set_function(self):
         if self.type == 'sin':

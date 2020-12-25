@@ -20,19 +20,19 @@ sig = Signal(sampling_frequency, sample_length)
 
 
 # Add a cos components
-mag1 = 1
+amp1 = 1
 omega1 = 5
 phase1 = 0
 
-sig.add('cos', omega1, mag1, phase1)
+sig.add('cos', omega1, amp1, phase1)
 
 
 # Add a sin component
 omega2 = 10
-mag2 = 1
+amp2 = 1
 phase2 = 1
 
-sig.add('sin', omega2, mag2, phase2)
+sig.add('sin', omega2, amp2, phase2)
 
 
 # Plot the result
