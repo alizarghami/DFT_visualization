@@ -5,20 +5,20 @@
 
 This is a simple code that lets you experiment with the DFT (Discrete Fourier Transform) of a periodic signal. In this code the periodic signal is constructed by mixture of Sine and Cosine components with different amplitudes, frequencies and phases. One can see the effect of each parameter by changing them and looking at the resulting graphs.
 The following parameters are shared between all components and can be changed:
-* Sampling Frequency: Frequency by which you sample your signal (in Hz)
-* Signal Length: The length which you took sample from your signal (in seconds)
+* **Sampling Frequency**: Frequency by which you sample your signal (in Hz)
+* **Signal Length**: The length which you took sample from your signal (in seconds)
 
 The following parameters should be set for each component individually:
-* Frequency: Frequency of the periodic component (in cycles per second)
-* Amplitude: Amplitude of the periodic component
-* Phase: Phase by which your periodic component is shifted (in radians)
+* **Frequency**: Frequency of the periodic component (in cycles per second)
+* **Amplitude**: Amplitude of the periodic component
+* **Phase**: Phase by which your periodic component is shifted (in radians)
 
 ### Getting Started
 
 In order to use this code you just need to have the following requirements installed:
-* Python 2.7 or Python 3.6 or above
-* Numpy
-* Matplotlib
+* **Python 2.7** or **Python 3.6** or above
+* **Numpy**
+* **Matplotlib**
 
 You can install each of the requirements separately or use Anaconda distribution [click here](https://www.anaconda.com/) to get all of them at once.
 
