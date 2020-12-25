@@ -1,3 +1,5 @@
+# THIS IS WHAT THE CODE INITIALLY WAS
+
 # Welcome To FFT Lab
 
 import numpy as np
