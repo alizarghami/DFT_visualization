@@ -26,7 +26,8 @@ class Signal(object):
         self.sample_rate = 1./self.sampling_frequency
         self.size = sampling_frequency * sampling_length
         
-        self.collection = []
+        self.components_size = 0
+        self.collection = {}
         self.x = None
         self.y = None
         self.fx = None
@@ -34,7 +35,7 @@ class Signal(object):
         
         self.set_domain()
         
-    def add(self, signal_type, frequency, amplitude, phase):
+    def add(self, signal_type, frequency, amplitude, phase, **kwargs):
         '''
         Add a component to the signal
 
@@ -48,13 +49,34 @@ class Signal(object):
             The components peak value.
         phase : float
             The components phase.
+            
+        Keyword Args
+        ------------
+        name: str
+            Name of the component.
         '''
-        sig = BasicSignal(signal_type, frequency, amplitude, phase, self.sampling_frequency, self.length)
-        self.collection.append(sig)
-        self.update()
+        c_id = self.components_size
+        if 'name' in kwargs:
+            name = kwargs['name']
+        else:
+            name = '{}_{}'.format(signal_type, c_id)
+        if name not in self.collection.keys():
+            sig = BasicSignal(signal_type, frequency, amplitude, phase, self.sampling_frequency, self.length)
+            self.collection[name] = sig
+            self.update()
+            self.components_size += 1
+        else:
+            print("A component with the name {} already exist".format(name))
+        
+    def remove(self, name):
+        if name in self.collection.keys():
+            del self.collection[name]
+            self.update()
+        else:
+            print("Component doesn't exist")
         
     def update(self):
-        self.y = np.sum([signal.y for signal in self.collection], axis=0)
+        self.y = np.sum([signal.y for signal in self.collection.values()], axis=0)
         self.fy = np.abs(np.fft.rfft(self.y))
 
     def set_domain(self):
@@ -70,7 +92,9 @@ class Signal(object):
         '''Plots each component, theperiodic signal and it's DFT'''
         c_size = len(self.collection)
         
-        for i, c in enumerate(self.collection):
+        plt.figure()
+        for i, k in enumerate(self.collection.keys()):
+            c = self.collection[k]
             plt.subplot(c_size+2, 1, i+1)
             plt.plot(c.x, c.y)
             
